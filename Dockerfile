@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} demo.jar
-ENTRYPOINT ["java","-jar","/demo.jar"]
+From tomcat:8.0.51-jre8-alpine
+RUN rm -rf /usr/local/tomcat/webapps/*
+COPY ./target/demo-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/demo.war
+CMD ["catalina.sh","run"]
