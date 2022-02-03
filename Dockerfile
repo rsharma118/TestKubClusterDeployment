@@ -4,6 +4,6 @@
 #CMD ["catalina.sh","run"]
 
 FROM openjdk:8
-ADD target/restdeploy-0.0.1-SNAPSHOT.jar restdeploy.jar
+ADD target/restdeploy.jar restdeploy.jar
 EXPOSE 8082
 ENTRYPOINT ["java","-jar","restdeploy.jar"]
