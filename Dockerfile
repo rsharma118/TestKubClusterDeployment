@@ -5,5 +5,5 @@
 
 FROM openjdk:8
 ADD target/restdeploy.jar restdeploy.jar
-EXPOSE 8082
+EXPOSE 8080
 ENTRYPOINT ["java","-jar","restdeploy.jar"]
