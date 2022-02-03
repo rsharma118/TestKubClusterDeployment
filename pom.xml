@@ -5,7 +5,7 @@
 	<groupId>com.prep</groupId>
 	<artifactId>restdeploy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>restdeploy</name>
 	<description>Demo project for Spring Boot kubernetes deployment</description>
 	
