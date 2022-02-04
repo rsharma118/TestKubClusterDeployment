@@ -3,7 +3,12 @@
 #COPY ./target/demo-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
 #CMD ["catalina.sh","run"]
 
-FROM openjdk:8
-ADD target/restdeploy.jar restdeploy.jar
+#FROM openjdk:8
+#ADD target/restdeploy.jar restdeploy.jar
 #EXPOSE 8080
+
+FROM adoptopenjdk/openjdk11:alpine-jre
+ARG JAR_FILE=target/restdeploy.jar
+WORKDIR /opt/app
+COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","restdeploy.jar"]
