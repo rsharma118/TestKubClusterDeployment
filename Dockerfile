@@ -10,5 +10,5 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 ARG JAR_FILE=target/restdeploy.jar
 WORKDIR /opt/app
-COPY ${JAR_FILE} app.jar
+COPY ${JAR_FILE} restdeploy.jar
 ENTRYPOINT ["java","-jar","restdeploy.jar"]
