@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +30,20 @@ public class EmpController {
 		return "Hello API called";
 	}
 	
+	Database db = client.database("demoapp_db", false);
+	
+	@GetMapping("/getAllData")
+	public List<EmpDoc> getAllData() throws IOException {
+		System.out.println("Hi..Api getAllData Called");
+	List<EmpDoc> doc=db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(EmpDoc.class);
+	return doc;
+	}
+	
 	@GetMapping("/getDataFromId/{id}")
 	public EmpDoc getDataFromId(@PathVariable String id) {
 	List<String> list=new ArrayList<String>();
 	list=client.getAllDbs();
-	Database db = client.database("demoapp_db", false);
+//	Database db = client.database("demoapp_db", false);
 	EmpDoc doc=db.find(EmpDoc.class,id);
 	System.out.println("Current running dbs are "+list.get(0));
 		return doc;
@@ -41,30 +51,21 @@ public class EmpController {
 	
 	@PostMapping("/saveData")
 	public Response saveData(@RequestBody EmpDoc emp) {
-	List<String> list=new ArrayList<String>();
-	list=client.getAllDbs();
-	Database db = client.database("demoapp_db", false);
 	Response res=db.save(emp);
 	System.out.println("Data saved Successfully!.");
 	return res;
 	}
 	
 	@DeleteMapping("/deleteDataFromId/{id}")
-	public EmpDoc deleteDataFromId(@PathVariable String id) {
-	List<String> list=new ArrayList<String>();
-	list=client.getAllDbs();
-	Database db = client.database("demoapp_db", false);
+	public Response deleteDataFromId(@PathVariable String id) {
 	EmpDoc doc=db.find(EmpDoc.class,id);
 	 Response response = db.remove(doc);
 	System.out.println("document deleted successfully");
-		return doc;
+		return response;
 	}
 	
 	@PutMapping("/updateData/{id}")
 	public Response updateData(@RequestBody EmpDoc emp,@PathVariable String id) {
-	List<String> list=new ArrayList<String>();
-	list=client.getAllDbs();
-	Database db = client.database("demoapp_db", false);
 	EmpDoc doc=db.find(EmpDoc.class,id);
 	doc.setDoj(emp.getDoj());
 	doc.setEmailid(emp.getEmailid());
