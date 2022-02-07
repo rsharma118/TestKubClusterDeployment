@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,12 @@ public class EmpController {
 		return "Hello API called";
 	}
 	
-	Database db = client.database("demoapp_db", false);
+	private Database db ;
+	
+	@PostConstruct
+	private void setUp() {
+		this.db = this.client.database("demoapp_db", true);
+	}
 	
 	@GetMapping("/getAllData")
 	public List<EmpDoc> getAllData() throws IOException {
