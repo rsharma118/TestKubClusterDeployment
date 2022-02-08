@@ -41,7 +41,7 @@ public class EmpController {
 	
 	@GetMapping("/getAllData")
 	public List<EmpDoc> getAllData() throws IOException {
-		System.out.println("Hi..Api getAllData Called");
+		System.out.println("Hi..Api getAllData Successfully");
 	List<EmpDoc> doc=db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(EmpDoc.class);
 	return doc;
 	}
